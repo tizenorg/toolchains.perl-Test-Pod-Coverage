@@ -8,6 +8,7 @@ Group:          Development/Libraries
 License:        GPL or Artistic
 URL:            http://search.cpan.org/dist/Test-Pod-Coverage/
 Source0:        http://www.cpan.org/authors/id/P/PE/PETDANCE/Test-Pod-Coverage-%{version}.tar.gz
+Source1001: packaging/perl-Test-Pod-Coverage.manifest 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
@@ -24,6 +25,7 @@ Checks for POD coverage in files for your distribution.
 
 
 %build
+cp %{SOURCE1001} .
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
 
@@ -45,6 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
+%manifest perl-Test-Pod-Coverage.manifest
 %defattr(-,root,root,-)
 %doc Changes
 %{perl_vendorlib}/Test/*
