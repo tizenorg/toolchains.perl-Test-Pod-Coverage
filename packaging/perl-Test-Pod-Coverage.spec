@@ -2,14 +2,13 @@ Name:           perl-Test-Pod-Coverage
 Version:        1.08
 Release:        5
 Summary:        Check for pod coverage in your distribution
-
 Group:          Development/Libraries
 License:        GPL or Artistic
 URL:            http://search.cpan.org/dist/Test-Pod-Coverage/
 Source0:        http://www.cpan.org/authors/id/P/PE/PETDANCE/Test-Pod-Coverage-%{version}.tar.gz
 Source1001:     perl-Test-Pod-Coverage.manifest 
-
 BuildArch:      noarch
+BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Pod::Coverage)
 BuildRequires:  perl(Test::Pod)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
@@ -44,6 +43,6 @@ make test
 %files
 %manifest perl-Test-Pod-Coverage.manifest
 %{perl_vendorlib}/Test/*
-%doc %{_mandir}/man3/*.3pm*
+#%doc %{_mandir}/man3/*.3pm*
 
 
