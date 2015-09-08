@@ -1,18 +1,19 @@
+#specfile originally created for Fedora, modified for Moblin Linux
 Name:           perl-Test-Pod-Coverage
 Version:        1.08
 Release:        5
 Summary:        Check for pod coverage in your distribution
+
 Group:          Development/Libraries
 License:        GPL or Artistic
 URL:            http://search.cpan.org/dist/Test-Pod-Coverage/
 Source0:        http://www.cpan.org/authors/id/P/PE/PETDANCE/Test-Pod-Coverage-%{version}.tar.gz
-Source1001:     perl-Test-Pod-Coverage.manifest 
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildArch:      noarch
-BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Pod::Coverage)
 BuildRequires:  perl(Test::Pod)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
-BuildRequires:  perl(Devel::Symdump)
 
 %description
 Checks for POD coverage in files for your distribution.
@@ -23,7 +24,6 @@ Checks for POD coverage in files for your distribution.
 
 
 %build
-cp %{SOURCE1001} .
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
 
@@ -40,9 +40,14 @@ chmod -R u+w $RPM_BUILD_ROOT/*
 make test
 
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
 %files
-%manifest perl-Test-Pod-Coverage.manifest
+%defattr(-,root,root,-)
+%doc Changes
 %{perl_vendorlib}/Test/*
-#%doc %{_mandir}/man3/*.3pm*
+%doc %{_mandir}/man3/*.3pm*
 
 
